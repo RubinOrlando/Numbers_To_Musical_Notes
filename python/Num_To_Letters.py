@@ -1,20 +1,26 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
-'''This program transforms integers to words in Spanish'''
+'''This program aims to transform integers to musical notes
+I'm not sure yet that it will serve my purpose, 
+which is to find the easiest way to code a lightweight music generation app. '''
 
-ONES = {0: '', 1: 'UN ', 2: 'DOS ', 3: 'TRES ', 4: 'CUATRO ', 5: 'CINCO ',
-        6: 'SEIS ', 7: 'SIETE ', 8: 'OCHO ', 9: 'NUEVE ', 10: 'DIEZ ',
-        11: 'ONCE ', 12: 'DOCE ', 13: 'TRECE ', 14: 'CATORCE ', 15: 'QUINCE ',
-        16: 'DIECISEIS ', 17: 'DIECISIETE ', 18: 'DIECIOCHO ',
-        19: 'DIECINUEVE ', 20: 'VEINTE '}
+NOTES = {0: '', 1: 'la ', 2: 'sib ', 3: 'do ', 4: 'reb ', 5: 're ',
+        6: 'mib ', 7: 'mi ', 8: 'fa ', 9: 'solb ', 10: 'sol ',
+        11: 'lab '}
 
-TENS = {0: '', 2: 'VEINTI', 3: 'TREINTA ', 4: 'CUARENTA ', 5: 'CINCUENTA ',
-        6: 'SESENTA ', 7: 'SETENTA ', 8: 'OCHENTA ', 9: 'NOVENTA '}
+OCTAVES = {0: '0', 1: '1', 2: '2', 3: '3 ', 4: '4 ', 5: '5 ',
+        6: '6 ', 7: '7 ', 8: '8 ', 9: '9 '}
 
-HUNDREDS = {1: 'CIENTO ', 2: 'DOSCIENTOS ', 3: 'TRESCIENTOS ',
-            4: 'CUATROCIENTOS ', 5: 'QUINIENTOS ', 6: 'SEISCIENTOS ',
-            7: 'SETECIENTOS ', 8: 'OCHOCIENTOS ', 9: 'NOVECIENTOS ', 0: ''}
+''' What to do with later variable chords and distinction between minor and major chords?
+Is that a relevant distinction? '''
+
+MINOR_CHORDS = {1: 'ladomi ', 2: 'sibrebfa ', 3: 'siresolb ', 4: 'domibsol ',
+               5: 'rebmisolb ', 6: 'refala ', 7: 'mibsolbsib ', 8: 'misolsi ', 
+               9: 'falabdo ', 10: 'solblasreb', 11: 'solsibre ', 12: 'labsimib'}
+MAJOR_CHORDS = {1: 'larebmi ', 2: 'sibrefa ', 3: 'simibsolb ', 4: 'domisol ',
+               5: 'rebfasolb ', 6: 'resolbla ', 7: 'mibsolsib ', 8: 'milabsi ', 
+               9: 'falado ', 10: 'solbsibreb', 11: 'solsire ', 12: 'labdomib'}
 
 
 def num_to_let(number):
@@ -28,37 +34,37 @@ def num_to_let(number):
     out = ''
 
     if n0:
-        if ht0:
+       if ht0:
             if ht0 == 1:
                 out += 'MIL ' + first_pass(h0)
             else:
                 out += first_pass(ht0) + 'MIL ' + first_pass(h0)
         out += first_pass(h0)
-        if out != 'UN ':
-            out += 'MILLONES '
+        
+        if out != 'NOTE '
+            out += 'SEQUENCES '
         else:
-            out += 'MILLÓN '
+            out += 'SEQUENCE '
 
     if ht1:
-        if ht1 == 1:
-            out += 'MIL ' + first_pass(h1)
-            return out
-        out += first_pass(ht1) + 'MIL '
+       if ht1 == 1:
+            out += 'CHORD ' + first_pass(h1)
+        return out
+        out += first_pass(ht1) + 'CHORD '
     out += first_pass(h1)
     return out
 
-
 def first_pass(number):
-    '''function that transforms numbers from 1-999 to words in Spanish'''
+    '''function that transforms numbers from 1-999 (???) to notes or chords'''
     if number == 100:
-        return 'CIEN '
+        return 'value '
     if number <= 20:
-        return ONES[number]
+        return NOTES[number]
     h = number / 100
     t = (number % 100) / 10
     o = (number % 10)
     if t < 2 or (t == 2 and o == 0):
-        return HUNDREDS[h] + ONES[number % 100]
+        return CHORDS[h] + NOTES[number % 100]
     if o and t > 2:
-        return HUNDREDS[h] + TENS[t] + 'Y ' + ONES[o]
-    return HUNDREDS[h] + TENS[t] + ONES[o]
+        return CHORDS[h] + OCTAVES[t] + 'Y ' + NOTES[o]
+    return CHORDS[h] + OCTAVES[t] + NOTES[o]
