@@ -2,12 +2,12 @@
 #-*- coding: utf-8 -*-
 
 '''This program aims to transform integers to musical notes
-I'm not sure yet that it will serve my purpose, 
+I'm not sure yet that it will serve my purpose,
 which is to find the easiest way to code a lightweight music generation app. '''
 
-NOTES = {0: '', 1: 'la ', 2: 'sib ', 3: 'do ', 4: 'reb ', 5: 're ',
-        6: 'mib ', 7: 'mi ', 8: 'fa ', 9: 'solb ', 10: 'sol ',
-        11: 'lab '}
+NOTES = {0: '', 1: 'do ', 2: 'reb ', 3: 're ', 4: 'mib ', 5: 'mi ',
+        6: 'fa ', 7: 'solb ', 8: 'sol ', 9: 'lab ', 10: 'la ',
+        11: 'sib ', 12: 'si '}
 
 OCTAVES = {0: '0', 1: '1', 2: '2', 3: '3 ', 4: '4 ', 5: '5 ',
         6: '6 ', 7: '7 ', 8: '8 ', 9: '9 '}
